@@ -6,7 +6,7 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-  let opcionHuman = prompt("Elige una opción: \n-. Piedra \n-. Papel \n-. Tijera\n", "");
+  let opcionHuman = prompt("Elige una opción: \n\n-. Piedra \n-. Papel \n-. Tijera\n", "");
 
   if (opcionHuman === null) {
     alert("Vuelva pronto");
@@ -27,9 +27,6 @@ function playRound(computerChoice, humanChoice) {
   if (humanChoice === null) {
     return;
   }
-
-  console.log(`Tú elegiste ${humanChoice}`);
-  console.log(`La máquina eligió ${computerChoice}`);
 
   if (computerChoice === humanChoice) {
     return 0; // Empate
@@ -66,22 +63,23 @@ function playGame() {
     if (ronda === 0) {
       computerScore++;
       humanScore++;
-      announceRoundResult("empate D:", humanScore, computerScore);
+      announceRoundResult("empate D:", humanScore, computerScore, computerChoice, humanChoice);
     } else if (ronda === 1) {
       computerScore++;
-      announceRoundResult("la máquina. Perdedor -.-", humanScore, computerScore);
+      announceRoundResult("la máquina. Perdedor -.-", humanScore, computerScore, computerChoice, humanChoice);
     } else if (ronda === 2) {
       humanScore++;
-      announceRoundResult("el usuario. Let's go!", humanScore, computerScore);
+      announceRoundResult("el usuario. Let's go!", humanScore, computerScore, computerChoice, humanChoice);
     }
   }
   announceFinalResult(humanScore, computerScore);
 }
 
-function announceRoundResult(result, humanScore, computerScore) {
+function announceRoundResult(result, humanScore, computerScore, computerChoice, humanChoice) {
+  alert(`Tú elegiste ${humanChoice}. \nLa máquina eligió ${computerChoice}`);
   alert(
     `Esta ronda ha sido ${
-      result === "empate" ? result : "victoria de " + result
+      result === "empate D:" ? result : "victoria de " + result
     } \n\nTu puntuación es ${humanScore} \nLa puntuación de la máquina es ${computerScore}`
   );
 }
@@ -96,4 +94,4 @@ function announceFinalResult(humanScore, computerScore) {
   }
 }
 
-playGame();
+document.getElementById("startGame").addEventListener("click", playGame);

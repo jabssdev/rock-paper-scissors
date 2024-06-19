@@ -5,7 +5,7 @@
 
 body {
   font-family: "Playwrite AU VIC", cursive;
-  background-image: linear-gradient(to right, #657be5 0%, #735eb7 100%);
+  background-image: linear-gradient(to right, #92a1ea 0%, #907ec9 100%);
 }
 
 .container {
@@ -26,6 +26,22 @@ h1 {
   animation: shine 5s linear infinite;
   color: transparent;
   background-clip: text;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #004aad;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  background-color: #00132c;
 }
 
 @keyframes shine {
