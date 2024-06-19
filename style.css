@@ -2,3 +2,34 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+body {
+  font-family: "Playwrite AU VIC", cursive;
+  background-image: linear-gradient(to right, #657be5 0%, #735eb7 100%);
+}
+
+.container {
+  height: 100vh;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.5rem;
+  background: linear-gradient(to right, #00132c 20%, #004aad 40%, #004aad 60%, #00132c 80%);
+  background-size: 200%;
+  animation: shine 5s linear infinite;
+  color: transparent;
+  background-clip: text;
+}
+
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
+}
