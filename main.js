@@ -1,95 +1,99 @@
+const options = ["piedra", "papel", "tijera"];
+
 function getComputerChoice() {
-  let numberRandom = Math.random().toFixed(3) * 1000;
-  if (numberRandom >= 0 && numberRandom <= 300) {
-    return "piedra";
-  } else if (numberRandom >= 400 && numberRandom <= 600) {
-    return "papel";
-  } else {
-    return "tijera";
-  }
+  const randomIndex = Math.floor(Math.random() * options.length);
+  return options[randomIndex];
 }
 
 function getHumanChoice() {
-  let opcionHuman = prompt("Elige una opción: \n-> Piedra \n-> Papel \n-> Tijera", "");
+  let opcionHuman = prompt("Elige una opción: \n-. Piedra \n-. Papel \n-. Tijera\n", "");
+
   if (opcionHuman === null) {
-    return alert("Vuelva pronto");
+    alert("Vuelva pronto");
+    return null;
   }
+
   opcionHuman = opcionHuman.toLowerCase().trim();
-  if (opcionHuman === "piedra" || opcionHuman === "papel" || opcionHuman === "tijera") {
-    if (opcionHuman === "piedra") {
-      return "piedra";
-    } else if (opcionHuman === "papel") {
-      return "papel";
-    } else {
-      return "tijera";
-    }
+
+  if (options.includes(opcionHuman)) {
+    return opcionHuman;
   } else {
-    return alert("No es una opción válida :( \nOpciones válidas: \n-> piedra, \n-> papel \n-> tijera");
+    alert("No es una opción válida :( \n\nOpciones válidas => piedra - papel - tijera");
+    return getHumanChoice(); // Volver a preguntar al usuario en caso de entrada no válida
   }
 }
 
-// let humanScore = 0;
-// let computerScore = 0;
-
 function playRound(computerChoice, humanChoice) {
-  if (humanChoice === null || humanChoice === undefined) {
+  if (humanChoice === null) {
     return;
+  }
+
+  console.log(`Tú elegiste ${humanChoice}`);
+  console.log(`La máquina eligió ${computerChoice}`);
+
+  if (computerChoice === humanChoice) {
+    return 0; // Empate
+  }
+
+  const conditions = {
+    piedra: "tijera",
+    tijera: "papel",
+    papel: "piedra",
+  };
+
+  if (conditions[computerChoice] === humanChoice) {
+    return 1; // Gana la máquina
   } else {
-    console.log(`Tú elegiste ${humanChoice}`);
-    console.log(`La máquina eligió ${computerChoice}`);
-    if (computerChoice === humanChoice) {
-      return 0;
-    } else if (
-      (computerChoice === "piedra" && humanChoice === "tijera") ||
-      (computerChoice === "papel" && humanChoice === "piedra") ||
-      (computerChoice === "tijera" && humanChoice === "papel")
-    ) {
-      return 1;
-    } else {
-      return 2;
-    }
+    return 2; // Gana el humano
   }
 }
 
 function playGame() {
   let humanScore = 0;
   let computerScore = 0;
+
   for (let i = 0; i < 5; i++) {
     const computerChoice = getComputerChoice();
     const humanChoice = getHumanChoice();
+
+    if (humanChoice === null) {
+      alert("Juego cancelado.");
+      return; // Termina el juego si el usuario cancela el prompt
+    }
 
     let ronda = playRound(computerChoice, humanChoice);
 
     if (ronda === 0) {
       computerScore++;
       humanScore++;
-
-      console.log("Esta ronda ha sido un empate");
-      console.log(`Tú puntuación es ${humanScore}`);
-      console.log(`La puntuación de la máquina es ${computerScore}`);
-      console.log(" ");
+      announceRoundResult("empate D:", humanScore, computerScore);
     } else if (ronda === 1) {
       computerScore++;
-
-      console.log("Esta ronda ha ganado la máquina");
-      console.log(`Tú puntuación es ${humanScore}`);
-      console.log(`La puntuación de la máquina es ${computerScore}`);
-      console.log(" ");
+      announceRoundResult("la máquina. Perdedor -.-", humanScore, computerScore);
     } else if (ronda === 2) {
       humanScore++;
-
-      console.log("Esta ronda la has ganado tú");
-      console.log(`Tú puntuación es ${humanScore}`);
-      console.log(`La puntuación de la máquina es ${computerScore}`);
-      console.log(" ");
-    } else {
-      continue;
+      announceRoundResult("el usuario. Let's go!", humanScore, computerScore);
     }
   }
-  return [humanScore, computerScore];
+  announceFinalResult(humanScore, computerScore);
 }
 
-const [humanScore, computerScore] = playGame();
+function announceRoundResult(result, humanScore, computerScore) {
+  alert(
+    `Esta ronda ha sido ${
+      result === "empate" ? result : "victoria de " + result
+    } \n\nTu puntuación es ${humanScore} \nLa puntuación de la máquina es ${computerScore}`
+  );
+}
 
-console.log(`Tú puntuación final es ${humanScore}`);
-console.log(`La puntuación final de la máquina es ${computerScore}`);
+function announceFinalResult(humanScore, computerScore) {
+  if (humanScore > computerScore) {
+    alert("¡Felicidades! Has ganado el juego!");
+  } else if (humanScore < computerScore) {
+    alert("Lo siento, ha ganado la máquina :(");
+  } else {
+    alert("El juego ha terminado en empate D:");
+  }
+}
+
+playGame();
