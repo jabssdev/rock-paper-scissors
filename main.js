@@ -9,7 +9,6 @@ function getHumanChoice() {
   let opcionHuman = prompt("Elige una opción: \n\n-. Piedra \n-. Papel \n-. Tijera\n", "");
 
   if (opcionHuman === null) {
-    alert("Vuelva pronto");
     return null;
   }
 
@@ -54,7 +53,7 @@ function playGame() {
     const humanChoice = getHumanChoice();
 
     if (humanChoice === null) {
-      alert("Juego cancelado.");
+      alert("Vuelva pronto ♥");
       return; // Termina el juego si el usuario cancela el prompt
     }
 
