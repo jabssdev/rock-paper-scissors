@@ -1,4 +1,6 @@
 const options = ["piedra", "papel", "tijera"];
+let humanScore = 0;
+let computerScore = 0;
 
 function getComputerChoice() {
   const randomIndex = Math.floor(Math.random() * options.length);
@@ -22,75 +24,74 @@ function getHumanChoice() {
   }
 }
 
-function playRound(computerChoice, humanChoice) {
-  if (humanChoice === null) {
-    return;
-  }
-
-  if (computerChoice === humanChoice) {
-    return 0; // Empate
-  }
-
+function checkRoundWinner(humanChoice, computerChoice) {
   const conditions = {
     piedra: "tijera",
     tijera: "papel",
     papel: "piedra",
   };
 
-  if (conditions[computerChoice] === humanChoice) {
-    return 1; // Gana la máquina
+  if (computerChoice === humanChoice) {
+    return "empate";
+  } else if (conditions[computerChoice] === humanChoice) {
+    return "computadora";
   } else {
-    return 2; // Gana el humano
+    return "humano";
   }
 }
 
-function playGame() {
-  let humanScore = 0;
-  let computerScore = 0;
+function announceRoundResult(result, humanChoice, computerChoice) {
+  let resultMessage = `Tú elegiste ${humanChoice}. \nLa máquina eligió ${computerChoice}.\n\n`;
 
-  for (let i = 0; i < 5; i++) {
-    const computerChoice = getComputerChoice();
-    const humanChoice = getHumanChoice();
-
-    if (humanChoice === null) {
-      alert("Vuelva pronto ♥");
-      return; // Termina el juego si el usuario cancela el prompt
-    }
-
-    let ronda = playRound(computerChoice, humanChoice);
-
-    if (ronda === 0) {
-      computerScore++;
-      humanScore++;
-      announceRoundResult("empate D:", humanScore, computerScore, computerChoice, humanChoice);
-    } else if (ronda === 1) {
-      computerScore++;
-      announceRoundResult("la máquina. Perdedor -.-", humanScore, computerScore, computerChoice, humanChoice);
-    } else if (ronda === 2) {
-      humanScore++;
-      announceRoundResult("el usuario. Let's go!", humanScore, computerScore, computerChoice, humanChoice);
-    }
-  }
-  announceFinalResult(humanScore, computerScore);
-}
-
-function announceRoundResult(result, humanScore, computerScore, computerChoice, humanChoice) {
-  alert(`Tú elegiste ${humanChoice}. \nLa máquina eligió ${computerChoice}`);
-  alert(
-    `Esta ronda ha sido ${
-      result === "empate D:" ? result : "victoria de " + result
-    } \n\nTu puntuación es ${humanScore} \nLa puntuación de la máquina es ${computerScore}`
-  );
-}
-
-function announceFinalResult(humanScore, computerScore) {
-  if (humanScore > computerScore) {
-    alert("¡Felicidades! Has ganado el juego!");
-  } else if (humanScore < computerScore) {
-    alert("Lo siento, ha ganado la máquina :(");
+  if (result === "empate") {
+    resultMessage += "Esta ronda ha sido un empate D:";
+  } else if (result === "computadora") {
+    resultMessage += "La máquina ganó esta ronda. Perdedor -.-";
   } else {
+    resultMessage += "Ganaste esta ronda. Let's go!";
+  }
+
+  alert(`${resultMessage}\n\nTu puntuación: ${humanScore}\nPuntuación de la máquina: ${computerScore}`);
+}
+
+function playRound() {
+  const computerChoice = getComputerChoice();
+  const humanChoice = getHumanChoice();
+
+  if (humanChoice === null) {
+    alert("Vuelva pronto ♥");
+    return; // Termina el juego si el usuario cancela el prompt
+  }
+
+  const result = checkRoundWinner(humanChoice, computerChoice);
+
+  if (result === "empate") {
+    announceRoundResult(result, humanChoice, computerChoice);
+  } else if (result === "computadora") {
+    computerScore++;
+    announceRoundResult(result, humanChoice, computerChoice);
+  } else {
+    humanScore++;
+    announceRoundResult(result, humanChoice, computerChoice);
+  }
+  announceFinalResult();
+}
+
+function announceFinalResult() {
+  if (humanScore === 5 && computerScore === 5) {
     alert("El juego ha terminado en empate D:");
+  } else if (computerScore === 5) {
+    alert("Lo siento, ha ganado la máquina :(");
+  } else if (humanScore === 5) {
+    alert("¡Felicidades! Has ganado el juego!");
+  }
+
+  // Reiniciar los puntajes
+  if (humanScore === 5 || computerScore === 5) {
+    humanScore = 0;
+    computerScore = 0;
   }
 }
 
-document.getElementById("startGame").addEventListener("click", playGame);
+document.getElementById("startGame").addEventListener("click", playRound);
+pco;
