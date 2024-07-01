@@ -94,4 +94,3 @@ function announceFinalResult() {
 }
 
 document.getElementById("startGame").addEventListener("click", playRound);
-pco;

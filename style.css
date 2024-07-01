@@ -1,3 +1,8 @@
+:root {
+  --bg-gradient: linear-gradient(to right, #eaecfb 0%, #92a1ea 100%);
+  --primary-color: ;
+}
+
 * {
   margin: 0;
   box-sizing: border-box;
@@ -5,18 +10,105 @@
 
 body {
   font-family: "Playwrite AU VIC", cursive;
-  background-image: linear-gradient(to right, #92a1ea 0%, #907ec9 100%);
+  background-image: linear-gradient(to right, #eaecfb 0%, #92a1ea 100%);
 }
 
 .container {
-  height: 100vh;
-  width: 90%;
+  width: 1100px;
+  margin: 20px auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  margin: 0 auto;
+  min-height: 600px;
+  padding: 30px;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-center {
   text-align: center;
+}
+
+.play-view-section {
+  flex-direction: column;
+  text-align: center;
+  display: none;
+}
+
+.score-section {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 100px;
+  align-items: center;
+  flex: 1;
+}
+
+.score-player,
+.score-computer {
+  width: 130px;
+}
+
+.announce-round {
+  align-self: flex-end;
+  background-color: #d4edda;
+  border-radius: 5px;
+  padding: 0 10px;
+  color: #155724;
+  font-size: 20px;
+}
+
+.selected-options-section {
+  display: flex;
+  justify-content: space-around;
+  flex: 1;
+  align-items: center;
+}
+
+.img-player-option,
+.img-computer-option {
+  width: 200px;
+  height: 200px;
+  margin: 20px;
+}
+
+.img-versus {
+  width: 100px;
+  height: 100px;
+  margin: 20px;
+}
+
+.button-options-section {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+  flex: 1;
+}
+
+.rock-option,
+.paper-option,
+.scissors-option {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: center;
+}
+
+.rock,
+.paper,
+.scissors {
+  width: 90px;
+  height: 90px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+img {
+  max-width: 100%;
 }
 
 h1 {
@@ -30,18 +122,19 @@ h1 {
 
 button {
   padding: 10px 20px;
-  background-color: #004aad;
+  background-color: #4d9aff;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 1rem;
-  margin-top: 20px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 button:hover {
   background-color: #00132c;
+  transition: background-color 0.3s;
+  transform: scale(1.05);
 }
 
 @keyframes shine {

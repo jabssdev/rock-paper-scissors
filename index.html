@@ -9,10 +9,62 @@
   </head>
   <body>
     <div class="container">
-      <h1>Game</h1>
-      <h1>Rock - Paper - Sccisors</h1>
-      <button id="startGame">Start game</button>
+      <section class="play-view-section flex-center">
+        <h1>Rock - Paper - Sccisors</h1>
+        <button id="startGame">Play</button>
+      </section>
+      <section class="score-section">
+        <article class="score-player text-center">
+          <h2>Player</h2>
+          <span>1</span>
+        </article>
+        <article class="announce-round">
+          <h3>Ganaste!!!</h3>
+        </article>
+        <article class="score-computer text-center">
+          <h2>Computer</h2>
+          <span>2</span>
+        </article>
+      </section>
+      <section class="selected-options-section">
+        <article class="player-option text-center">
+          <img class="img-player-option" src="img/piedra.png" alt="rock" width="200px" height="200px" />
+          <h3>Piedra</h3>
+        </article>
+        <article class="img-versus">
+          <img src="img/contra.png" alt="Imagen versus" />
+        </article>
+        <article class="computer-option text-center">
+          <img class="img-computer-option" src="img/papel.png" alt="rock" width="200px" height="200px" />
+          <h3>Papel</h3>
+        </article>
+      </section>
+      <section class="button-options-section">
+        <article class="rock-option">
+          <button class="rock"><img src="img/button-piedra.png" alt="imagen de botón de piedra" /></button>
+          <span
+            >Presionar <br />
+            J</span
+          >
+        </article>
+        <article class="paper-option">
+          <button class="paper"><img src="img/button-papel.png" alt="imagen de botón de papel" /></button>
+          <span
+            >Presionar <br />
+            K</span
+          >
+        </article>
+        <article class="scissors-option">
+          <button class="scissors"><img src="img/button-tijera.png" alt="imagen de botón de tijera" /></button>
+          <span
+            >Presionar <br />
+            L</span
+          >
+        </article>
+      </section>
     </div>
+
+    <!-- Scripts -->
     <script src="main.js" defer></script>
   </body>
 </html>
