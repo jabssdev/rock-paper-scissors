@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock - Paper - Scissors</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css" />
     <link rel="stylesheet" href="style.css" />
     <link href="https://fonts.googleapis.com/css2?family=Playwrite+AU+VIC:wght@100..400&display=swap" rel="stylesheet" />
   </head>
@@ -41,30 +42,98 @@
       </section>
       <section class="button-options-section">
         <article class="rock-option">
-          <button class="rock"><img src="img/button-piedra.png" alt="imagen de botón de piedra" /></button>
+          <button class="rock-button"><img src="img/button-piedra.png" alt="imagen de botón de piedra" /></button>
           <span
             >Presionar <br />
             J</span
           >
         </article>
         <article class="paper-option">
-          <button class="paper"><img src="img/button-papel.png" alt="imagen de botón de papel" /></button>
+          <button class="paper-button"><img src="img/button-papel.png" alt="imagen de botón de papel" /></button>
           <span
             >Presionar <br />
             K</span
           >
         </article>
         <article class="scissors-option">
-          <button class="scissors"><img src="img/button-tijera.png" alt="imagen de botón de tijera" /></button>
+          <button class="scissors-button"><img src="img/button-tijera.png" alt="imagen de botón de tijera" /></button>
           <span
             >Presionar <br />
             L</span
           >
         </article>
       </section>
+      <button class="js-modal-trigger" data-target="modal-js-example">Open JS example modal</button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal-js-example">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Resultados</p>
+          <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+          <p class="announce-result">
+            Felicidades, ganaste el juego!!! <br />
+            ♥♥♥
+          </p>
+        </section>
+        <footer class="modal-card-foot">
+          <div class="buttons">
+            <button class="button is-success btn-play-again"><img class="img-play-again" src="img/play-again.png" alt="Icono de jugar otra vez" /></button>
+            <button class="button btn-exit-game"><img class="img-exit-game" src="img/salir.png" alt="Icono de salir del juego" /></button>
+          </div>
+        </footer>
+      </div>
     </div>
 
     <!-- Scripts -->
     <script src="main.js" defer></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Functions to open and close a modal
+        function openModal($el) {
+          $el.classList.add("is-active");
+        }
+
+        function closeModal($el) {
+          $el.classList.remove("is-active");
+        }
+
+        function closeAllModals() {
+          (document.querySelectorAll(".modal") || []).forEach(($modal) => {
+            closeModal($modal);
+          });
+        }
+
+        // Add a click event on buttons to open a specific modal
+        (document.querySelectorAll(".js-modal-trigger") || []).forEach(($trigger) => {
+          const modal = $trigger.dataset.target;
+          const $target = document.getElementById(modal);
+
+          $trigger.addEventListener("click", () => {
+            openModal($target);
+          });
+        });
+
+        // Add a click event on various child elements to close the parent modal
+        (document.querySelectorAll(".modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button") || []).forEach(($close) => {
+          const $target = $close.closest(".modal");
+
+          $close.addEventListener("click", () => {
+            closeModal($target);
+          });
+        });
+
+        // Add a keyboard event to close all modals
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") {
+            closeAllModals();
+          }
+        });
+      });
+    </script>
   </body>
 </html>
