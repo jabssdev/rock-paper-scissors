@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,12 +6,16 @@
     <title>Rock - Paper - Scissors</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css" />
     <link rel="stylesheet" href="style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Playwrite+AU+VIC:wght@100..400&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playwrite+AU+VIC:wght@100..400&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div class="container">
       <section class="play-view-section flex-center">
-        <h1>Rock - Paper - Sccisors</h1>
+        <h1>Rock - Paper - Scissors</h1>
+        <h2>Hola</h2>
         <button id="startGame">Play</button>
       </section>
       <section class="score-section">
@@ -42,25 +46,31 @@
       </section>
       <section class="button-options-section">
         <article class="rock-option">
-          <button class="rock-button"><img src="img/button-piedra.png" alt="imagen de botón de piedra" /></button>
+          <button class="rock-button">
+            <img src="img/button-piedra.png" alt="imagen de botón de piedra" />
+          </button>
           <span
             >Presionar <br />
             J</span
           >
         </article>
         <article class="paper-option">
-          <button class="paper-button"><img src="img/button-papel.png" alt="imagen de botón de papel" /></button>
+          <button class="paper-button">
+            <img src="img/button-papel.png" alt="imagen de botón de papel" />
+          </button>
           <span
             >Presionar <br />
             K</span
           >
         </article>
         <article class="scissors-option">
-          <button class="scissors-button"><img src="img/button-tijera.png" alt="imagen de botón de tijera" /></button>
+          <button class="scissors-button">
+            <img src="img/button-tijera.png" alt="imagen de botón de tijera" />
+          </button>
           <span
             >Presionar <br />
-            L</span
-          >
+            L
+          </span>
         </article>
       </section>
       <button class="js-modal-trigger" data-target="modal-js-example">Open JS example modal</button>
@@ -76,64 +86,25 @@
         </header>
         <section class="modal-card-body">
           <p class="announce-result">
-            Felicidades, ganaste el juego!!! <br />
+            Felicidades, ganaste el juego!!!
+            <br />
             ♥♥♥
           </p>
         </section>
         <footer class="modal-card-foot">
           <div class="buttons">
-            <button class="button is-success btn-play-again"><img class="img-play-again" src="img/play-again.png" alt="Icono de jugar otra vez" /></button>
-            <button class="button btn-exit-game"><img class="img-exit-game" src="img/salir.png" alt="Icono de salir del juego" /></button>
+            <button class="button is-success btn-play-again">
+              <img class="img-play-again" src="img/play-again.png" alt="Icono de jugar otra vez" />
+            </button>
+            <button class="button btn-exit-game">
+              <img class="img-exit-game" src="img/salir.png" alt="Icono de salir del juego" />
+            </button>
           </div>
         </footer>
       </div>
     </div>
 
     <!-- Scripts -->
-    <script src="main.js" defer></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        // Functions to open and close a modal
-        function openModal($el) {
-          $el.classList.add("is-active");
-        }
-
-        function closeModal($el) {
-          $el.classList.remove("is-active");
-        }
-
-        function closeAllModals() {
-          (document.querySelectorAll(".modal") || []).forEach(($modal) => {
-            closeModal($modal);
-          });
-        }
-
-        // Add a click event on buttons to open a specific modal
-        (document.querySelectorAll(".js-modal-trigger") || []).forEach(($trigger) => {
-          const modal = $trigger.dataset.target;
-          const $target = document.getElementById(modal);
-
-          $trigger.addEventListener("click", () => {
-            openModal($target);
-          });
-        });
-
-        // Add a click event on various child elements to close the parent modal
-        (document.querySelectorAll(".modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button") || []).forEach(($close) => {
-          const $target = $close.closest(".modal");
-
-          $close.addEventListener("click", () => {
-            closeModal($target);
-          });
-        });
-
-        // Add a keyboard event to close all modals
-        document.addEventListener("keydown", (event) => {
-          if (event.key === "Escape") {
-            closeAllModals();
-          }
-        });
-      });
-    </script>
+    <script src="script.js" defer></script>
   </body>
 </html>
